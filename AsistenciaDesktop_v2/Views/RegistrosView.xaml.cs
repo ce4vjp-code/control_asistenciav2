@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
@@ -77,7 +77,7 @@ namespace AsistenciaDesktop_v2.Views
             CargarRegistros();
         }
 
-        private void CargarRegistros()
+        public void CargarRegistros()
         {
             if (!dpFecha.SelectedDate.HasValue) return;
 

@@ -128,6 +128,7 @@ namespace AsistenciaDesktop_v2.Data
 
                             if (data.TryGetProperty("colegio", out var colegio))
                             {
+                                var serverColegio = new HashSet<string>();
                                 var cmd = localConn.CreateCommand();
                                 cmd.Transaction = tx;
                                 cmd.CommandText = @"INSERT INTO AsistenciaColegio (AlumnoId, Fecha, HoraIngreso, HoraSalida, IsSynced) 
@@ -142,17 +143,49 @@ namespace AsistenciaDesktop_v2.Data
                                 cmd.Parameters.Add("@hs", SqliteType.Text);
                                 foreach (var item in colegio.EnumerateArray())
                                 {
-                                    cmd.Parameters["@id"].Value = item.GetProperty("AlumnoId").GetString();
-                                    cmd.Parameters["@f"].Value = item.GetProperty("Fecha").GetString();
+                                    string id = item.GetProperty("AlumnoId").GetString();
+                                    string f = item.GetProperty("Fecha").GetString();
+                                    serverColegio.Add($"{id}|{f}");
+                                    cmd.Parameters["@id"].Value = id;
+                                    cmd.Parameters["@f"].Value = f;
                                     cmd.Parameters["@hi"].Value = item.GetProperty("HoraIngreso").GetString();
                                     var hs = item.GetProperty("HoraSalida");
                                     cmd.Parameters["@hs"].Value = hs.ValueKind == JsonValueKind.Null ? DBNull.Value : hs.GetString();
                                     cmd.ExecuteNonQuery();
                                 }
+
+                                var delCmd = localConn.CreateCommand();
+                                delCmd.Transaction = tx;
+                                delCmd.CommandText = "SELECT AlumnoId, Fecha FROM AsistenciaColegio WHERE IsSynced = 1 AND Fecha >= date('now', 'localtime', '-7 days')";
+                                var colToDelete = new List<Tuple<string, string>>();
+                                using (var reader = delCmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        string id = reader.GetString(0);
+                                        string f = reader.GetString(1);
+                                        if (!serverColegio.Contains($"{id}|{f}")) colToDelete.Add(new Tuple<string, string>(id, f));
+                                    }
+                                }
+                                if (colToDelete.Count > 0)
+                                {
+                                    var execDel = localConn.CreateCommand();
+                                    execDel.Transaction = tx;
+                                    execDel.CommandText = "DELETE FROM AsistenciaColegio WHERE AlumnoId = @id AND Fecha = @f";
+                                    execDel.Parameters.Add("@id", SqliteType.Text);
+                                    execDel.Parameters.Add("@f", SqliteType.Text);
+                                    foreach (var item in colToDelete)
+                                    {
+                                        execDel.Parameters["@id"].Value = item.Item1;
+                                        execDel.Parameters["@f"].Value = item.Item2;
+                                        execDel.ExecuteNonQuery();
+                                    }
+                                }
                             }
 
                             if (data.TryGetProperty("comedor", out var comedor))
                             {
+                                var serverComedor = new HashSet<string>();
                                 var cmd = localConn.CreateCommand();
                                 cmd.Transaction = tx;
                                 cmd.CommandText = @"INSERT INTO AsistenciaComedor (AlumnoId, Fecha, HoraIngreso, IsSynced) 
@@ -165,10 +198,41 @@ namespace AsistenciaDesktop_v2.Data
                                 cmd.Parameters.Add("@hi", SqliteType.Text);
                                 foreach (var item in comedor.EnumerateArray())
                                 {
-                                    cmd.Parameters["@id"].Value = item.GetProperty("AlumnoId").GetString();
-                                    cmd.Parameters["@f"].Value = item.GetProperty("Fecha").GetString();
+                                    string id = item.GetProperty("AlumnoId").GetString();
+                                    string f = item.GetProperty("Fecha").GetString();
+                                    serverComedor.Add($"{id}|{f}");
+                                    cmd.Parameters["@id"].Value = id;
+                                    cmd.Parameters["@f"].Value = f;
                                     cmd.Parameters["@hi"].Value = item.GetProperty("HoraIngreso").GetString();
                                     cmd.ExecuteNonQuery();
+                                }
+
+                                var delCmd = localConn.CreateCommand();
+                                delCmd.Transaction = tx;
+                                delCmd.CommandText = "SELECT AlumnoId, Fecha FROM AsistenciaComedor WHERE IsSynced = 1 AND Fecha >= date('now', 'localtime', '-7 days')";
+                                var comToDelete = new List<Tuple<string, string>>();
+                                using (var reader = delCmd.ExecuteReader())
+                                {
+                                    while (reader.Read())
+                                    {
+                                        string id = reader.GetString(0);
+                                        string f = reader.GetString(1);
+                                        if (!serverComedor.Contains($"{id}|{f}")) comToDelete.Add(new Tuple<string, string>(id, f));
+                                    }
+                                }
+                                if (comToDelete.Count > 0)
+                                {
+                                    var execDel = localConn.CreateCommand();
+                                    execDel.Transaction = tx;
+                                    execDel.CommandText = "DELETE FROM AsistenciaComedor WHERE AlumnoId = @id AND Fecha = @f";
+                                    execDel.Parameters.Add("@id", SqliteType.Text);
+                                    execDel.Parameters.Add("@f", SqliteType.Text);
+                                    foreach (var item in comToDelete)
+                                    {
+                                        execDel.Parameters["@id"].Value = item.Item1;
+                                        execDel.Parameters["@f"].Value = item.Item2;
+                                        execDel.ExecuteNonQuery();
+                                    }
                                 }
                             }
 

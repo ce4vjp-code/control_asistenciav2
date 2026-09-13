@@ -57,7 +57,7 @@ namespace AsistenciaDesktop_v2.Views
             }
         }
 
-        private void CargarListaAlumnos()
+        public void CargarListaAlumnos()
         {
             try
             {
@@ -249,7 +249,7 @@ namespace AsistenciaDesktop_v2.Views
             }
         }
 
-        private void ActualizarEstadisticas()
+        public void ActualizarEstadisticas()
         {
             try
             {

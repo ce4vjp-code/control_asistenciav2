@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
@@ -127,6 +127,43 @@ namespace AsistenciaDesktop_v2.Views
                 }
             } catch (Exception ex) {
                 MessageBox.Show("Error al descargar: " + ex.Message);
+            }
+        }
+
+        private async void BtnSincronizar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var btn = sender as Button;
+                if (btn != null) btn.IsEnabled = false;
+
+                await SyncEngine.SyncDataAsync();
+                
+                if (MainContent.Content is RegistrosView regView)
+                {
+                    regView.CargarRegistros();
+                }
+                else if (MainContent.Content is ScannerColegioView scColegio)
+                {
+                    scColegio.ActualizarEstadisticas();
+                    scColegio.CargarListaAlumnos();
+                }
+                else if (MainContent.Content is ScannerComedorView scComedor)
+                {
+                    scComedor.ActualizarEstadisticas();
+                    scComedor.CargarListaAlumnos();
+                }
+
+                MessageBox.Show("Información actualizada y sincronizada correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al sincronizar: " + ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            finally
+            {
+                var btn = sender as Button;
+                if (btn != null) btn.IsEnabled = true;
             }
         }
 
