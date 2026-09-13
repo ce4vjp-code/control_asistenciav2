@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
@@ -13,7 +13,7 @@ namespace AsistenciaDesktop_v2.Data
     public static class SyncEngine
     {
         private static Timer _timer;
-        private static bool isSyncing = false;
+        private static Task _currentSyncTask;
         private static readonly HttpClient _httpClient = new HttpClient();
 
         public static void StartSyncTimer()
@@ -21,11 +21,17 @@ namespace AsistenciaDesktop_v2.Data
             _timer = new Timer(async (e) => await SyncDataAsync(), null, 0, 30000);
         }
 
-                public static async Task SyncDataAsync()
+                public static Task SyncDataAsync()
         {
-            if (isSyncing) return;
-            isSyncing = true;
+            if (_currentSyncTask != null && !_currentSyncTask.IsCompleted)
+                return _currentSyncTask;
+            
+            _currentSyncTask = DoSyncAsync();
+            return _currentSyncTask;
+        }
 
+        private static async Task DoSyncAsync()
+        {
             try
             {
                 using (var localConn = LocalDatabaseManager.GetConnection())
@@ -45,7 +51,6 @@ namespace AsistenciaDesktop_v2.Data
             }
             finally
             {
-                isSyncing = false;
             }
         }
 
@@ -489,4 +494,6 @@ namespace AsistenciaDesktop_v2.Data
         }
     }
 }
+
+
 

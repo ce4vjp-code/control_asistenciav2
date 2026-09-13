@@ -20,7 +20,7 @@
                 <TextBox x:Name="txtUsername" materialDesign:HintAssist.Hint="Nombre de Usuario (Solo lectura)" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,15" FontSize="15" IsReadOnly="True" Foreground="Gray"/>
                 
-                <PasswordBox x:Name="txtPassword" materialDesign:HintAssist.Hint="Nueva ContraseÃ±a (Dejar en blanco para mantener actual)" 
+                <PasswordBox x:Name="txtPassword" materialDesign:HintAssist.Hint="Nueva Contraseña (Dejar en blanco para mantener actual)" 
                              Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0,0,0,15" FontSize="15"/>
                 
                 <ComboBox x:Name="cmbRole" materialDesign:HintAssist.Hint="Rol del Sistema" 
@@ -29,7 +29,7 @@
                     <ComboBoxItem Content="operador"/>
                 </ComboBox>
                 
-                <TextBox x:Name="txtEmail" materialDesign:HintAssist.Hint="Correo para RecepciÃ³n de Reportes (Opcional)" 
+                <TextBox x:Name="txtEmail" materialDesign:HintAssist.Hint="Correo para Recepción de Reportes (Opcional)" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,25" FontSize="15"/>
 
                 <Grid>
