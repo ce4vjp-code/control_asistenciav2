@@ -4,7 +4,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Control de Asistencia v2" Height="768" Width="1024"
         WindowStartupLocation="CenterScreen" WindowState="Maximized"
-        Icon="pack://application:,,,/Assets/logo.png"
+        Icon="pack://application:,,,/Assets/logo.ico"
         Background="{DynamicResource AppBackground}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
@@ -85,5 +85,7 @@
         </Border>
     </Grid>
 </Window>
+
+
 
 

@@ -35,7 +35,7 @@
                                 <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
                     <Button x:Name="btnBorrarTodo" Content="BORRAR TODO" Style="{StaticResource MaterialDesignOutlinedButton}" Foreground="Red" BorderBrush="Red" Margin="0,0,10,0" Click="BtnBorrarTodo_Click" Visibility="Collapsed"/>
                     <Button x:Name="btnReporteInasistencia" Content="INASISTENCIAS" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,10,0" Click="BtnReporteInasistencia_Click"/>
-                    <Button x:Name="btnReporteEspecial" Content="SALIDA SIN COMEDOR" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,10,0" Click="BtnReporteEspecial_Click" Visibility="Collapsed"/>
+                    <Button x:Name="btnReporteComedorPendiente" Content="COMEDOR PENDIENTE" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,10,0" Click="BtnReporteComedorPendiente_Click"/>
                     <Button x:Name="btnExportar" Content="GUARDAR PDF" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,10,0" Click="BtnExportar_Click"/>
                     <Button x:Name="btnEnviar" Content="ENVIAR A ADMINS" Style="{StaticResource MaterialDesignRaisedButton}" Click="BtnEnviar_Click"/>
                 </StackPanel>
@@ -72,6 +72,7 @@
         </materialDesign:Card>
     </Grid>
 </UserControl>
+
 
 
 

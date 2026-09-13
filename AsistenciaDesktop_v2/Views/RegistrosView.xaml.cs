@@ -425,9 +425,27 @@ namespace AsistenciaDesktop_v2.Views
             }
         }
 
-        private void BtnReporteEspecial_Click(object sender, RoutedEventArgs e)
+        private void BtnReporteComedorPendiente_Click(object sender, RoutedEventArgs e)
         {
-            // Oculto en UI.
+            if (!dpFecha.SelectedDate.HasValue) return;
+            string fechaStr = dpFecha.SelectedDate.Value.ToString("yyyy-MM-dd");
+
+            string pdfPath = Services.ReportesAutomaticosService.GenerarReporteComedor(fechaStr);
+            if (pdfPath != null && System.IO.File.Exists(pdfPath))
+            {
+                try {
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo {
+                        FileName = pdfPath,
+                        UseShellExecute = true
+                    });
+                } catch {
+                    MessageBox.Show($"Reporte generado exitosamente en:\n{pdfPath}", "Reporte Generado", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay alumnos que cumplan la condición (con ingreso pero sin comedor) para la fecha seleccionada.", "Sin Datos", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private async void BtnEnviar_Click(object sender, RoutedEventArgs e)
@@ -630,6 +648,7 @@ namespace AsistenciaDesktop_v2.Views
         }
     }
 }
+
 
 
 

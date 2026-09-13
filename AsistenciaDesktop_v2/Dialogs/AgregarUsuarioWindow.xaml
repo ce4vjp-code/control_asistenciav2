@@ -1,8 +1,8 @@
-<Window x:Class="AsistenciaDesktop_v2.Dialogs.AgregarUsuarioWindow"
+﻿<Window x:Class="AsistenciaDesktop_v2.Dialogs.AgregarUsuarioWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Gestión de Usuario" Height="450" Width="400"
+        Title="GestiÃ³n de Usuario" Height="450" Width="400"
         WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
         Background="{DynamicResource AppBackground}"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -20,7 +20,7 @@
                 <TextBox x:Name="txtUsername" materialDesign:HintAssist.Hint="Nombre de Usuario (ej: inspector)" 
                          Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,15" FontSize="15"/>
                 
-                <PasswordBox x:Name="txtPassword" materialDesign:HintAssist.Hint="Contraseña" 
+                <PasswordBox x:Name="txtPassword" materialDesign:HintAssist.Hint="ContraseÃ±a" 
                          Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0,0,0,15" FontSize="15"/>
                 
                 <ComboBox x:Name="cmbRole" materialDesign:HintAssist.Hint="Rol de Sistema" 
@@ -46,3 +46,4 @@
         </materialDesign:Card>
     </Grid>
 </Window>
+

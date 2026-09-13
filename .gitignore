@@ -26,3 +26,10 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+
+# Large binaries and DBs
+*.exe
+*.zip
+*.db
+*.db-shm
+*.db-wal
