@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="AsistenciaDesktop_v2.Views.ScannerColegioView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             Background="Transparent">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Header -->
+        <materialDesign:Card Grid.Row="0" Margin="0,0,0,15" Padding="20" UniformCornerRadius="8">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <TextBlock x:Name="txtTitulo" Text="Control de Asistencia - Ingreso" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                        <TextBlock Text="Escanee el RUT del alumno o ingreselo manualmente." FontSize="14" Foreground="Gray" Margin="0,5,0,0"/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,20,0" VerticalAlignment="Center">
+                        <TextBlock Text="Ingreso" FontSize="16" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <ToggleButton x:Name="tglModo" Width="50" Height="25" Style="{StaticResource MaterialDesignSwitchDarkToggleButton}" IsChecked="False" Click="tglModo_Click" />
+                        <TextBlock Text="Salida" FontSize="16" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </StackPanel>
+                    
+                    <TextBox Grid.Column="2" x:Name="txtScanColegio" Width="250" FontSize="20"
+                             materialDesign:HintAssist.Hint="Escáner (RUT)"
+                             Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                             KeyDown="txtScanColegio_KeyDown" />
+                </Grid>
+                
+                <!-- Feedback Mini -->
+                <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                    <materialDesign:PackIcon x:Name="IconoEstado" Kind="AccountCheck" Width="24" Height="24" Foreground="Gray" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock x:Name="txtNombreUltimo" Text="Esperando lectura..." FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock x:Name="txtCursoUltimo" Text="-" FontSize="16" Foreground="Gray" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock x:Name="txtMensajeUltimo" Text="" FontSize="16" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </materialDesign:Card>
+
+        <!-- Estadísticas Horizontales -->
+        <materialDesign:Card Grid.Row="1" Margin="0,0,0,15" Padding="15" UniformCornerRadius="8">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock Text="Estadísticas de Hoy:" FontSize="18" FontWeight="Bold" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                
+                <Border Background="#E8F5E9" CornerRadius="8" Padding="15,5" Margin="0,0,20,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock x:Name="txtLabelTotal" Text="Total Ingresos: " Foreground="#2E7D32" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="txtTotalIngresos" Text="0" Foreground="#2E7D32" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                
+                <Border Background="#FFF3E0" CornerRadius="8" Padding="15,5">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Porcentaje Asistencia: " Foreground="#EF6C00" FontSize="16" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="txtPorcentaje" Text="0%" Foreground="#EF6C00" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </materialDesign:Card>
+
+        <!-- Búsqueda y Lista (Full Width) -->
+        <materialDesign:Card Grid.Row="2" Padding="20" UniformCornerRadius="8">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                
+                <TextBox Grid.Row="0" x:Name="txtBuscar" Margin="0,0,0,10"
+                         materialDesign:HintAssist.Hint="Buscar alumno por RUT, Nombre o Curso..."
+                         Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                         TextChanged="txtBuscar_TextChanged"/>
+                         
+                <DataGrid Grid.Row="1" x:Name="dgAlumnos" AutoGenerateColumns="False" IsReadOnly="True"
+                          CanUserAddRows="False" CanUserDeleteRows="False" HeadersVisibility="Column"
+                          Background="White" VerticalScrollBarVisibility="Auto">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="RUT" Binding="{Binding NumeroUnico}" Width="*"/>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}" Width="2*"/>
+                        <DataGridTextColumn Header="Curso" Binding="{Binding Curso}" Width="*"/>
+                        <DataGridTemplateColumn Header="Acción" Width="100">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Marcar" CommandParameter="{Binding NumeroUnico}" Click="btnMarcarManual_Click" 
+                                            Style="{StaticResource MaterialDesignFlatButton}" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</UserControl>

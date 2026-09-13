@@ -1,0 +1,48 @@
+<Window x:Class="AsistenciaDesktop_v2.Dialogs.AgregarUsuarioWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Gestión de Usuario" Height="450" Width="400"
+        WindowStartupLocation="CenterOwner" ResizeMode="NoResize"
+        Background="{DynamicResource AppBackground}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <Grid>
+        <materialDesign:Card Margin="20" UniformCornerRadius="8" Padding="20">
+            <StackPanel>
+                <TextBlock Text="Nuevo Usuario" FontSize="20" FontWeight="Bold" Margin="0,0,0,20" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                
+                <TextBox x:Name="txtUsername" materialDesign:HintAssist.Hint="Nombre de Usuario (ej: inspector)" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,15" FontSize="15"/>
+                
+                <PasswordBox x:Name="txtPassword" materialDesign:HintAssist.Hint="Contraseña" 
+                         Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0,0,0,15" FontSize="15"/>
+                
+                <ComboBox x:Name="cmbRole" materialDesign:HintAssist.Hint="Rol de Sistema" 
+                          Style="{StaticResource MaterialDesignFloatingHintComboBox}" Margin="0,0,0,15" FontSize="15">
+                    <ComboBoxItem Content="admin" IsSelected="True"/>
+                    <ComboBoxItem Content="operador"/>
+                </ComboBox>
+                
+                <TextBox x:Name="txtEmail" materialDesign:HintAssist.Hint="Correo (Para recibir reportes)" 
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0,0,0,25" FontSize="15"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Grid.Column="0" Content="CANCELAR" Style="{StaticResource MaterialDesignOutlinedButton}" Click="BtnCancelar_Click"/>
+                    <Button Grid.Column="2" Content="GUARDAR" Style="{StaticResource MaterialDesignRaisedButton}" Click="BtnGuardar_Click"/>
+                </Grid>
+            </StackPanel>
+        </materialDesign:Card>
+    </Grid>
+</Window>

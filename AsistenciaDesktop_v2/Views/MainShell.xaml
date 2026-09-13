@@ -1,0 +1,89 @@
+﻿<Window x:Class="AsistenciaDesktop_v2.Views.MainShell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Control de Asistencia v2" Height="768" Width="1024"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Icon="pack://application:,,,/Assets/logo.png"
+        Background="{DynamicResource AppBackground}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="14"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0" Background="#1E1E2C" CornerRadius="0">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="20,30,20,30">
+                    <Image Source="pack://application:,,,/Assets/logo.png" Height="40" Margin="0,0,10,0"/>
+                    <TextBlock Text="Asistencia v2" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <StackPanel Margin="10,0,10,0">
+                    <Button x:Name="BtnEscanner" Height="50" Margin="0,5" HorizontalContentAlignment="Left" Click="BtnMenu_Click" Foreground="White" Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="QrcodeScan" Width="24" Height="24" Margin="0,0,15,0"/>
+                            <TextBlock Text="Escáner Colegio" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="BtnComedor" Height="50" Margin="0,5" HorizontalContentAlignment="Left" Click="BtnMenu_Click" Foreground="White" Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="FoodApple" Width="24" Height="24" Margin="0,0,15,0"/>
+                            <TextBlock Text="Escáner Comedor" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="BtnAlumnos" Height="50" Margin="0,5" HorizontalContentAlignment="Left" Click="BtnMenu_Click" Foreground="White" Visibility="Collapsed" Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="AccountGroup" Width="24" Height="24" Margin="0,0,15,0"/>
+                            <TextBlock Text="Gestión Alumnos" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </Button>
+
+                    <Button x:Name="BtnReportes" Height="50" Margin="0,5" HorizontalContentAlignment="Left" Click="BtnMenu_Click" Foreground="White" Visibility="Collapsed" Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="ChartBar" Width="24" Height="24" Margin="0,0,15,0"/>
+                            <TextBlock Text="Reportes y Registros" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </Button>
+                    
+                    
+
+                                        <Button x:Name="BtnUsuarios" Height="50" Margin="0,5" HorizontalContentAlignment="Left" Click="BtnMenu_Click" Foreground="White" Visibility="Collapsed" Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:PackIcon Kind="AccountCog" Width="24" Height="24" Margin="0,0,15,0"/>
+                            <TextBlock Text="Usuarios" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </Button>
+
+<Button x:Name="BtnNotificaciones" Height="50" Margin="0,5" HorizontalContentAlignment="Left" Click="BtnNotificaciones_Click" Foreground="White" Style="{StaticResource MaterialDesignFlatButton}">
+                        <StackPanel Orientation="Horizontal">
+                            <materialDesign:Badged x:Name="BadgeNotificaciones" Badge="" BadgeBackground="Red" Margin="0,0,15,0">
+                                <materialDesign:PackIcon Kind="Bell" Width="24" Height="24"/>
+                            </materialDesign:Badged>
+                            <TextBlock Text="Descargar Reportes" VerticalAlignment="Center" FontSize="16"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                
+                <Button Content="CERRAR SESIÓN" Style="{StaticResource MaterialDesignRaisedButton}" Background="#D32F2F" BorderBrush="#D32F2F" Foreground="White" Margin="20,40,20,0" Click="BtnLogout_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Main Content Area -->
+        <Border Grid.Column="1" Background="{DynamicResource AppBackground}">
+            <ContentControl x:Name="MainContent" Margin="20"/>
+        </Border>
+    </Grid>
+</Window>
+
+
