@@ -63,6 +63,8 @@ namespace AsistenciaDesktop_v2.Dialogs
                         cmdUpdate.ExecuteNonQuery();
                     }
 
+                    _ = AsistenciaDesktop_v2.Data.SyncEngine.SendApiRequest("delete_usuario", new { username = username });
+
                     MessageBox.Show("Usuario actualizado correctamente.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                     this.DialogResult = true;
                     this.Close();
