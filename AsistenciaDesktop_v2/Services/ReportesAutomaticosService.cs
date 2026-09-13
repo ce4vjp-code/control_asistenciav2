@@ -57,7 +57,7 @@ namespace AsistenciaDesktop_v2.Services
             Logger.Log("Alertas encontradas: " + alertasComedor.Count); if (alertasComedor.Count == 0) return null;
 
             string filename = $"Reporte_AlertaComedor_{fechaStr.Replace("-","")}.pdf";
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Asistencia_Reportes");
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Asistencia_Reportes", fechaStr);
             if (!Directory.Exists(path)) Directory.CreateDirectory(path);
             
             string fullPath = Path.Combine(path, filename);
@@ -161,6 +161,8 @@ namespace AsistenciaDesktop_v2.Services
         }
     }
 }
+
+
 
 
 

@@ -19,7 +19,7 @@
                 </Grid.ColumnDefinitions>
                 
                 <StackPanel>
-                    <TextBlock Text="GestiÃ³n de Alumnos" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                    <TextBlock Text="Gestión de Alumnos" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
                     <TextBox x:Name="txtBuscar" Width="300" Margin="0,10,0,0" HorizontalAlignment="Left"
                              materialDesign:HintAssist.Hint="Buscar por nombre o RUT..."
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
@@ -60,4 +60,5 @@
         </materialDesign:Card>
     </Grid>
 </UserControl>
+
 

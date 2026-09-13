@@ -155,7 +155,9 @@ namespace AsistenciaDesktop_v2.Views
             string cursoFilter = cmbCurso.SelectedItem as string;
             string cursoSufijo = (cursoFilter == "Todos los Cursos" || string.IsNullOrEmpty(cursoFilter)) ? "General" : cursoFilter;
             string filename = $"Reporte_Asistencia_{cursoSufijo}_{fecha}.pdf";
-            string path = Path.Combine(Path.GetTempPath(), filename);
+            string basePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Asistencia_Reportes", fecha);
+            if (!Directory.Exists(basePath)) Directory.CreateDirectory(basePath);
+            string path = Path.Combine(basePath, filename);
 
             var alertaComedor = listaActual.Where(r => 
                 !string.IsNullOrWhiteSpace(r.HoraIngreso) && r.HoraIngreso != "-" && 
@@ -193,7 +195,9 @@ namespace AsistenciaDesktop_v2.Views
             string cursoFilter = cmbCurso.SelectedItem as string;
             string cursoSufijo = (cursoFilter == "Todos los Cursos" || string.IsNullOrEmpty(cursoFilter)) ? "General" : cursoFilter;
             string filename = $"Reporte_Inasistencia_{cursoSufijo}_{fechaStr}.pdf";
-            string path = Path.Combine(Path.GetTempPath(), filename);
+            string basePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Asistencia_Reportes", fechaStr);
+            if (!Directory.Exists(basePath)) Directory.CreateDirectory(basePath);
+            string path = Path.Combine(basePath, filename);
 
             var inasistentes = new List<RegistroFila>();
 
@@ -378,15 +382,13 @@ namespace AsistenciaDesktop_v2.Views
                 string pdfPath = GenerarReportePdfFisico(false);
                 if (pdfPath != null)
                 {
-                    var sfd = new Microsoft.Win32.SaveFileDialog
-                    {
-                        Filter = "PDF Document (*.pdf)|*.pdf",
-                        FileName = Path.GetFileName(pdfPath)
-                    };
-                    if (sfd.ShowDialog() == true)
-                    {
-                        File.Copy(pdfPath, sfd.FileName, true);
-                        MessageBox.Show("PDF exportado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    try {
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo {
+                            FileName = pdfPath,
+                            UseShellExecute = true
+                        });
+                    } catch {
+                        MessageBox.Show($"Reporte guardado exitosamente en:\n{pdfPath}", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }
@@ -403,15 +405,13 @@ namespace AsistenciaDesktop_v2.Views
                 string pdfPath = GenerarReporteInasistenciaPdfFisico();
                 if (pdfPath != null)
                 {
-                    var sfd = new Microsoft.Win32.SaveFileDialog
-                    {
-                        Filter = "PDF Document (*.pdf)|*.pdf",
-                        FileName = Path.GetFileName(pdfPath)
-                    };
-                    if (sfd.ShowDialog() == true)
-                    {
-                        File.Copy(pdfPath, sfd.FileName, true);
-                        MessageBox.Show("Reporte de Inasistencia exportado con éxito.", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
+                    try {
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo {
+                            FileName = pdfPath,
+                            UseShellExecute = true
+                        });
+                    } catch {
+                        MessageBox.Show($"Reporte guardado exitosamente en:\n{pdfPath}", "Éxito", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
                 else
@@ -648,6 +648,18 @@ namespace AsistenciaDesktop_v2.Views
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

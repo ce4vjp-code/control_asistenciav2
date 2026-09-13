@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="AsistenciaDesktop_v2.Views.RegistrosView"
+<UserControl x:Class="AsistenciaDesktop_v2.Views.RegistrosView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
@@ -12,34 +12,32 @@
 
         <!-- Cabecera -->
         <materialDesign:Card Grid.Row="0" Margin="0,0,0,20" Padding="20" UniformCornerRadius="8">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                
-                <StackPanel>
-                    <TextBlock Text="Reportes de Asistencia" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
-                    
-                                        <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
-                        <TextBlock Text="Fecha:" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="16"/>
-                        <DatePicker x:Name="dpFecha" Width="150" SelectedDateChanged="DpFecha_SelectedDateChanged"
-                                    VerticalAlignment="Center" FontSize="16"/>
-                                    
-                        <TextBlock Text="Curso:" VerticalAlignment="Center" Margin="20,0,10,0" FontSize="16"/>
-                        <ComboBox x:Name="cmbCurso" Width="150" SelectionChanged="CmbCurso_SelectionChanged"
-                                  VerticalAlignment="Center" FontSize="16"/>
-                    </StackPanel>
-                </StackPanel>
+              <Grid>
+                  <Grid.RowDefinitions>
+                      <RowDefinition Height="Auto"/>
+                      <RowDefinition Height="Auto"/>
+                  </Grid.RowDefinitions>
+                  
+                  <StackPanel Grid.Row="0">
+                      <TextBlock Text="Reportes de Asistencia" FontSize="24" FontWeight="Bold" Foreground="{DynamicResource PrimaryHueMidBrush}"/>
+                      
+                      <StackPanel Orientation="Horizontal" Margin="0,15,0,0">
+                          <TextBlock Text="Fecha:" VerticalAlignment="Center" Margin="0,0,10,0" FontSize="16"/>
+                          <DatePicker x:Name="dpFecha" Width="150" SelectedDateChanged="DpFecha_SelectedDateChanged" VerticalAlignment="Center" FontSize="16"/>
+                                      
+                          <TextBlock Text="Curso:" VerticalAlignment="Center" Margin="20,0,10,0" FontSize="16"/>
+                          <ComboBox x:Name="cmbCurso" Width="150" SelectionChanged="CmbCurso_SelectionChanged" VerticalAlignment="Center" FontSize="16"/>
+                      </StackPanel>
+                  </StackPanel>
 
-                                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Bottom">
-                    <Button x:Name="btnBorrarTodo" Content="BORRAR TODO" Style="{StaticResource MaterialDesignOutlinedButton}" Foreground="Red" BorderBrush="Red" Margin="0,0,10,0" Click="BtnBorrarTodo_Click" Visibility="Collapsed"/>
-                    <Button x:Name="btnReporteInasistencia" Content="INASISTENCIAS" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,10,0" Click="BtnReporteInasistencia_Click"/>
-                    <Button x:Name="btnReporteComedorPendiente" Content="COMEDOR PENDIENTE" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,10,0" Click="BtnReporteComedorPendiente_Click"/>
-                    <Button x:Name="btnExportar" Content="GUARDAR PDF" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,10,0" Click="BtnExportar_Click"/>
-                    <Button x:Name="btnEnviar" Content="ENVIAR A ADMINS" Style="{StaticResource MaterialDesignRaisedButton}" Click="BtnEnviar_Click"/>
-                </StackPanel>
-            </Grid>
+                  <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,20,0,0">
+                      <Button x:Name="btnBorrarTodo" Content="BORRAR TODO" Style="{StaticResource MaterialDesignOutlinedButton}" Foreground="Red" BorderBrush="Red" Margin="0,0,10,0" Click="BtnBorrarTodo_Click" Visibility="Collapsed"/>
+                      <Button x:Name="btnReporteInasistencia" Content="INASISTENCIAS" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,10,0" Click="BtnReporteInasistencia_Click"/>
+                      <Button x:Name="btnReporteComedorPendiente" Content="COMEDOR PENDIENTE" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,10,0" Click="BtnReporteComedorPendiente_Click"/>
+                      <Button x:Name="btnExportar" Content="GUARDAR PDF" Style="{StaticResource MaterialDesignOutlinedButton}" Margin="0,0,10,0" Click="BtnExportar_Click"/>
+                      <Button x:Name="btnEnviar" Content="ENVIAR A ADMINS" Style="{StaticResource MaterialDesignRaisedButton}" Click="BtnEnviar_Click"/>
+                  </StackPanel>
+              </Grid>
         </materialDesign:Card>
 
         <!-- Tabla -->
